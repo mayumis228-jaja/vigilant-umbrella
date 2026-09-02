@@ -68,9 +68,9 @@ st.divider()
 col_btn1, col_btn2 = st.columns(2)
 
 with col_btn1:
-if st.button("🔄 リセット"):
-    st.session_state.clear()
-    st.rerun()
+    if st.button("🔄 リセット"):
+        st.session_state.clear()
+        st.rerun()
 
 with col_btn2:
     confirm = st.button(
