@@ -27,34 +27,27 @@ orders = []
 
 for item, price in MENU.items():
 
-    col1, col2, col3 = st.columns([4, 2, 2])
+    col1, col2 = st.columns([5, 2])
 
     with col1:
         st.write(f"{item}（{price}円）")
 
     with col2:
         qty = st.number_input(
-            "",
+            label="数量",
             min_value=0,
             max_value=99,
             value=0,
             step=1,
-            key=item
-        )
-    with col3:
-        qty = st.number_input(
-            "",
-            min_value=0,
-            max_value=99,
-            value=0,
-            step=1,
-            key=item
+            key=item,
+            label_visibility="collapsed"
         )
 
     if qty > 0:
         amount = qty * price
         total_qty += qty
         total_price += amount
+
         orders.append(
             f"{item}　{qty}個　{amount:,}円"
         )
