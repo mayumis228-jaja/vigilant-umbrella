@@ -63,7 +63,23 @@ st.markdown(
 
 st.write("---")
 
-if st.button("注文確定"):
+st.divider()
+
+col_btn1, col_btn2 = st.columns(2)
+
+with col_btn1:
+    if st.button("🔄 リセット", use_container_width=True):
+        for item in MENU.keys():
+            st.session_state[item] = 0
+        st.rerun()
+
+with col_btn2:
+    confirm = st.button(
+        "✅ 注文確定",
+        use_container_width=True
+    )
+    
+if confirm:
 
     if total_qty == 0:
         st.warning("数量を入力してください。")
