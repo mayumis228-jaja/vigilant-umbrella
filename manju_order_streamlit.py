@@ -30,11 +30,17 @@ for item, price in MENU.items():
     col1, col2, col3 = st.columns([4, 2, 2])
 
     with col1:
-        st.write(item)
+        st.write(f"{item}（{price}円）")
 
     with col2:
-        st.write(f"{price}円")
-
+        qty = st.number_input(
+            "",
+            min_value=0,
+            max_value=99,
+            value=0,
+            step=1,
+            key=item
+        )
     with col3:
         qty = st.number_input(
             "",
