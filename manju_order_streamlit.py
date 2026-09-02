@@ -42,8 +42,10 @@ for item, price in MENU.items():
     col1, col2 = st.columns([5, 2])
 
     with col1:
-        st.write(f"{item}（{price}円）")
-
+        st.markdown(
+            f"<span style='font-size:24px'>{item}（{price}円）</span>",
+            unsafe_allow_html=True
+        )
     with col2:
         qty = st.number_input(
             label="数量",
