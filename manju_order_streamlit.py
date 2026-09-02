@@ -19,7 +19,19 @@ st.set_page_config(
 
 st.title("🍡 饅頭注文アプリ")
 
+# リセット用
+if "reset_count" not in st.session_state:
+    st.session_state.reset_count = 0
+
 st.write("---")
+
+head1, head2 = st.columns([5, 2])
+
+with head1:
+    st.markdown("**商品名（単価）**")
+
+with head2:
+    st.markdown("**数量**")
 
 total_qty = 0
 total_price = 0
@@ -39,7 +51,7 @@ for item, price in MENU.items():
             max_value=99,
             value=0,
             step=1,
-            key=item,
+            key=f"{item}_{st.session_state.reset_count}",
             label_visibility="collapsed"
         )
 
@@ -61,15 +73,13 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.write("---")
-
 st.divider()
 
 col_btn1, col_btn2 = st.columns(2)
 
 with col_btn1:
-    if st.button("🔄 リセット"):
-        st.session_state.clear()
+    if st.button("🔄 リセット", use_container_width=True):
+        st.session_state.reset_count += 1
         st.rerun()
 
 with col_btn2:
@@ -77,11 +87,12 @@ with col_btn2:
         "✅ 注文確定",
         use_container_width=True
     )
-    
+
 if confirm:
 
     if total_qty == 0:
         st.warning("数量を入力してください。")
+
     else:
         st.success("注文を受け付けました")
 
